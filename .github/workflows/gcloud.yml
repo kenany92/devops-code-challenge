@@ -49,7 +49,7 @@ name: Deploy to Cloud Run from Source
 on:
   push:
     branches:
-      - "main"
+      - "develop"
 
 env:
   PROJECT_ID: winter-pivot-349116 
