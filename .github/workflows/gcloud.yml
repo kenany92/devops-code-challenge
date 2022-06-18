@@ -84,7 +84,8 @@ jobs:
           
       - name: Deploy to Cloud Run
         id: deploy
-        run: gcloud run deploy devpos-code-b --quiet --platform managed --region ${{ env.REGION }} --source ./backend --project ${{env.SERVICE}} --format json
+        run: gcloud iam service-accounts list
+       # run: gcloud run deploy devpos-code-b --quiet --platform managed --region ${{ env.REGION }} --source ./backend --project ${{env.SERVICE}} --format json
        # with:
          # service: ${{ env.SERVICE }}
         #  region: ${{ env.REGION }}
