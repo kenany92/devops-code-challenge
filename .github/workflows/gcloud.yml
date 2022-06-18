@@ -68,7 +68,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: GCP Login
+      - name: GCP Auth
         id: auth
         uses: 'google-github-actions/auth@v0'
         with:
