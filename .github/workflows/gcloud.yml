@@ -79,9 +79,27 @@ jobs:
         id: gcloud
         uses: 'google-github-actions/setup-gcloud@v0'
         
-      - name: Deploy to Cloud Run
-        id: deploy
+      - name: Deploy backend to app engine
+        id: backend
         run: gcloud app deploy backend/app.yml --project='${{ env.PROJECT_ID }}'
+
+      - name: setup NodeJS
+        id: nodejs
+        uses: 'uses: actions/setup-node@v1'
+        with:
+          node-version: 16
+
+      - name: Install node dependencies
+        id: install
+        run: npm install
+
+      - name: Build frontend
+        id: build
+        run: npm run build
+      
+      - name: Deploy frontend
+        id: frontend
+        run: gcloud app deploy frontend/app.yml --project='${{ env.PROJECT_ID }}'
        # run: gcloud run deploy devpos-code-b --quiet --platform managed --region ${{ env.REGION }} --source ./backend --project ${{env.SERVICE}} --format json
        # with:
          # service: ${{ env.SERVICE }}
