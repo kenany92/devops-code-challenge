@@ -78,10 +78,7 @@ jobs:
       - name: Setup GCP
         id: gcloud
         uses: 'google-github-actions/setup-gcloud@v0'
-        with: 
-          service_account_key: '${{ secrets.GCP_SA_KEY }}'
-          service_account_email: 'devops-code@winter-pivot-349116.iam.gserviceaccount.com'
-          
+        
       - name: Deploy to Cloud Run
         id: deploy
         run: gcloud iam service-accounts list
