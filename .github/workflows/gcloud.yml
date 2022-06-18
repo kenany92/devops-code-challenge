@@ -91,11 +91,12 @@ jobs:
 
       - name: Install node dependencies
         id: install
-        run: cd frontend
+        working-directory: ./frontend
         run: npm install
 
       - name: Build frontend
         id: build
+        working-directory: ./frontend
         run: npm run build
       
       - name: Deploy frontend
