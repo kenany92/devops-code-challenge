@@ -79,10 +79,15 @@ jobs:
         id: gcloud
         uses: 'google-github-actions/setup-gcloud@v0'
 
+      - name: Drop env file
+        id: env
+        working-directory: ./backend
+        run: mv .env .env.old
+
       - name: Setup backend cors
         id: cors
         working-directory: ./backend
-        run: echo "ALLOW_ORIGIN = https://frontend-dot-winter-pivot-349116.el.r.appspot.com/" >> .env
+        run: mv .env.production .env
         
       - name: Deploy backend to app engine
         id: backend
