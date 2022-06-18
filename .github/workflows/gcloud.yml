@@ -85,7 +85,7 @@ jobs:
 
       - name: setup NodeJS
         id: nodejs
-        uses: 'uses: actions/setup-node@v1'
+        uses: 'actions/setup-node@v1'
         with:
           node-version: 16
 
