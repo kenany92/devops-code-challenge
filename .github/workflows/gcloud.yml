@@ -74,15 +74,19 @@ jobs:
         with:
           workload_identity_provider: '${{ secrets.WIF_PROVIDER }}' 
           service_account: '${{ secrets.WIF_SERVICE_ACCOUNT }}'
+          
+      - name: Setup GCP
+        id: gcloud
+        uses: 'google-github-actions/setup-gcloud@v0'
 
       - name: Deploy to Cloud Run
         id: deploy
-        uses: google-github-actions/deploy-cloudrun@v0.10.0
-        with:
-          service: ${{ env.SERVICE }}
-          region: ${{ env.REGION }}
+        run: gcloud run deploy devpos-code-b --quiet --platform managed --region ${{ env.REGION }} --source ./backend --project ${{env.SERVICE}} --format json
+       # with:
+         # service: ${{ env.SERVICE }}
+        #  region: ${{ env.REGION }}
           # NOTE: If required, update to the appropriate source folder
-          source: ./backend
+       #   source: ./backend
 
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
