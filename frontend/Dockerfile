@@ -1,14 +1,17 @@
-FROM alpine
+FROM node:lts-alpine3.16 as builder
 
-COPY setup-docker.sh ./
+COPY . ./
 
-RUN /bin/bash setup-docker.sh
+RUN mv .env.docker .env
 
-RUN ["ls"]
-# FROM nginx
+RUN npm install --silent
 
-# COPY build/ nginx/html
+RUN npm install react-scripts -g --silent
 
-# ENV API_URL=http://
+RUN npm run build
 
-# EXPOSE 80
+FROM nginx:1.17.1-alpine as deploy
+
+COPY --from=builder /build /usr/share/nginx/html
+
+EXPOSE 80

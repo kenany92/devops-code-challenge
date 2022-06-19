@@ -4,6 +4,8 @@ COPY ./* ./
 
 EXPOSE 8080
 
-RUN ['npm', "install"]
+RUN mv .env.docker .env
 
-ENTRYPOINT ['npm', "start"]
+RUN npm install
+
+ENTRYPOINT npm start
